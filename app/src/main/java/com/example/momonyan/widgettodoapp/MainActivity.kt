@@ -14,10 +14,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editText2: EditText
     private lateinit var editText3: EditText
     private lateinit var button: Button
-    private  lateinit var sharedPreferences:SharedPreferences
-    private  lateinit var   prefsPrivateEditor:SharedPreferences.Editor
-    private  var memoString:Array<String> = Array<String>(4,{""})
-    private  var memoBool:Array<Boolean> = Array<Boolean>(4,{false})
+    private lateinit var sharedPreferences:SharedPreferences
+    private lateinit var   prefsPrivateEditor:SharedPreferences.Editor
+    private var memoString:Array<String> = Array<String>(4,{""})
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         editText2= findViewById(R.id.editText3)
         editText3= findViewById(R.id.editText4)
         button = findViewById(R.id.button)
-        sharedPreferences = getSharedPreferences("list", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("Widget", MODE_PRIVATE);
 
         memoString[0] = sharedPreferences.getString("list1", "")
         memoString[1] = sharedPreferences.getString("list2", "")
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             prefsPrivateEditor.putString("list2",editText1.text.toString())
             prefsPrivateEditor.putString("list3",editText2.text.toString())
             prefsPrivateEditor.putString("list4",editText3.text.toString())
-            prefsPrivateEditor.commit()
+            prefsPrivateEditor.apply()
         }
     }
 }
