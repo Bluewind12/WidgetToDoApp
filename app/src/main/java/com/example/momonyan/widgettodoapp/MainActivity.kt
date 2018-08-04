@@ -8,6 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RemoteViews
 import android.widget.TextView
+import android.appwidget.AppWidgetManager
+import android.support.v4.app.NotificationCompat.getExtras
+import android.content.Intent
+
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var editText0: EditText
@@ -51,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             prefsPrivateEditor.putString("list3", editText2.text.toString())
             prefsPrivateEditor.putString("list4", editText3.text.toString())
             prefsPrivateEditor.apply()
+
         }
     }
 }
