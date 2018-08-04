@@ -29,9 +29,6 @@ class NewAppWidget : AppWidgetProvider() {
 
     override fun onEnabled(context: Context) {
         // Enter relevant functionality for when the first widget is created
-        val filter = IntentFilter()
-        filter.addAction(Intent.ACTION_TIME_TICK)
-        context.registerReceiver(this, filter)
     }
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
