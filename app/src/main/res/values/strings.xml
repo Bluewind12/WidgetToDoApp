@@ -2,4 +2,10 @@
     <string name="app_name">WidgetToDoApp</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="naiyou">内容</string>
+    <string name="shiyou">仕様</string>
+    <string name="naiyou1">4つまでのToDoを保存できる！</string>
+    <string name="naiyou2">Widgetで表示ができる！！</string>
+    <string name="shiyou1">Widgetの更新間隔は30分おき</string>
+    <string name="shiyou2">すぐにWidget更新したい場合は、\n削除→再作成</string>
 </resources>

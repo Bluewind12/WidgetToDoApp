@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var button: Button
+    private lateinit var button2: Button
     private lateinit var sharedPreferences:SharedPreferences
     private lateinit var prefsPrivateEditor:SharedPreferences.Editor
     private var memoString:Array<String> = Array<String>(4,{""})
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
 
         button = findViewById(R.id.button)
+        button2 = findViewById(R.id.button2)
         sharedPreferences = getSharedPreferences("Widget", Context.MODE_MULTI_PROCESS);
 
         memoString[0] = sharedPreferences.getString("list1", "")
@@ -57,6 +59,10 @@ class MainActivity : AppCompatActivity() {
             prefsPrivateEditor.putString("list4", editText3.text.toString())
             prefsPrivateEditor.apply()
 
+        }
+        button2.setOnClickListener {
+            val intent = Intent(this,ReadMeActivity::class.java)
+            startActivity(intent)
         }
     }
 }
