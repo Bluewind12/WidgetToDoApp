@@ -12,6 +12,7 @@ import android.widget.RemoteViews
 import android.content.IntentFilter
 import android.os.IBinder
 import android.content.ComponentName
+import android.graphics.Color
 
 /**
  * Implementation of App Widget functionality.
@@ -40,10 +41,19 @@ class NewAppWidget : AppWidgetProvider() {
                                      appWidgetId: Int) {
             val views = RemoteViews(context.packageName, R.layout.new_app_widget)
             preferences = context.getSharedPreferences("Widget", AppCompatActivity.MODE_MULTI_PROCESS)
+
             views.setTextViewText(R.id.textView2, preferences.getString("list1", ""))
+            views.setTextColor(R.id.textView2, preferences.getInt("list1_Color", Color.rgb(0,0,0)))
+
             views.setTextViewText(R.id.textView3, preferences.getString("list2", ""))
+            views.setTextColor(R.id.textView3, preferences.getInt("list2_Color",Color.rgb(0,0,0)))
+
             views.setTextViewText(R.id.textView4, preferences.getString("list3", ""))
+            views.setTextColor(R.id.textView4, preferences.getInt("list3_Color",Color.rgb(0,0,0)))
+
             views.setTextViewText(R.id.textView5, preferences.getString("list4", ""))
+            views.setTextColor(R.id.textView5, preferences.getInt("list4_Color",Color.rgb(0,0,0)))
+
             // Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }

@@ -30,6 +30,9 @@
         <activity android:name=".ReadMeActivity"
             android:label="README">
         </activity>
+        <activity android:name=".SetColorActivity"
+            android:label="SetColor">
+        </activity>
     </application>
 
 </manifest>

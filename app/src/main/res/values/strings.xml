@@ -8,4 +8,9 @@
     <string name="naiyou2">Widgetで表示ができる！！</string>
     <string name="shiyou1">Widgetの更新間隔は30分おき</string>
     <string name="shiyou2">すぐにWidget更新したい場合は、\n削除→再作成</string>
+    <string name="Red">Red</string>
+    <string name="Green">Green</string>
+    <string name="Blue">Blue</string>
+    <string name="TotalColor">Color:%3d,%3d,%3d</string>
+
 </resources>
