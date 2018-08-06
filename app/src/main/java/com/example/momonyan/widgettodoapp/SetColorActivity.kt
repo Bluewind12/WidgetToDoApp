@@ -13,54 +13,48 @@ import android.widget.TextView
 import android.widget.Toast
 
 class SetColorActivity : AppCompatActivity() {
-
+    //入れ子
     private lateinit var textView: TextView
     private lateinit var testTextView: TextView
     private lateinit var seekBarR: SeekBar
     private lateinit var seekBarG: SeekBar
     private lateinit var seekBarB: SeekBar
     private lateinit var changeButton: Button
-
+    //色データ管理
     private var red = 0
     private var green = 0
     private var blue = 0
     private var totalColor = 0x000000
-
+    //変更元
     private var setNames = ""
-
-
+    //データ保持
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var prefsPrivateEditor: SharedPreferences.Editor
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.set_color)
+        init()
 
-        sharedPreferences = getSharedPreferences("Widget", Context.MODE_MULTI_PROCESS);
-        prefsPrivateEditor = sharedPreferences.edit()
-        setNames = intent.getStringExtra("name")
+        //数値
+        red = sharedPreferences.getInt(setNames + "_ColorRed", 0)
+        green = sharedPreferences.getInt(setNames + "_ColorGreen", 0)
+        blue = sharedPreferences.getInt(setNames + "_ColorBlue", 0)
 
-        textView = findViewById(R.id.nameText)
-        textView.text = getString(R.string.TotalColor, 0, 0, 0)
-        testTextView = findViewById(R.id.testText)
+
+        //表示
+        textView.text = getString(R.string.TotalColor, red, green, blue)
         testTextView.setTextColor(sharedPreferences.getInt(setNames + "_Color", 0))
 
-        seekBarR = findViewById(R.id.seekBar)
+        //シークバー
         seekBarR.progress = sharedPreferences.getInt(setNames + "_ColorRed", 0)
         seekBarR.max = 255
-
-        seekBarG = findViewById(R.id.seekBar2)
         seekBarG.progress = sharedPreferences.getInt(setNames + "_ColorGreen", 0)
         seekBarG.max = 255
-
-        seekBarB = findViewById(R.id.seekBar3)
         seekBarB.progress = sharedPreferences.getInt(setNames + "_ColorBlue", 0)
         seekBarB.max = 255
 
-        changeButton = findViewById(R.id.changeButton)
-
-
+        //動作
         seekBarR.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             //変更時
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
@@ -119,7 +113,6 @@ class SetColorActivity : AppCompatActivity() {
 
             }
         })
-
         changeButton.setOnClickListener {
             prefsPrivateEditor.putInt(setNames + "_Color", totalColor)
             prefsPrivateEditor.putInt(setNames + "_ColorRed", red)
@@ -127,11 +120,33 @@ class SetColorActivity : AppCompatActivity() {
             prefsPrivateEditor.putInt(setNames + "_ColorBlue", blue)
             prefsPrivateEditor.apply()
 
-            Toast.makeText(this,setNames+"のカラーを変更しました",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, setNames + "のカラーを変更しました", Toast.LENGTH_LONG).show()
 
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             intent.setFlags(FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
+    }
+
+    private fun init() {
+        //データ保持用
+        sharedPreferences = getSharedPreferences("Widget", Context.MODE_MULTI_PROCESS);
+        prefsPrivateEditor = sharedPreferences.edit()
+
+        //変更元
+        setNames = intent.getStringExtra("name")
+
+        //表示
+        textView = findViewById(R.id.nameText)
+        testTextView = findViewById(R.id.testText)
+
+        //シークバー
+        seekBarR = findViewById(R.id.seekBar)
+        seekBarG = findViewById(R.id.seekBar2)
+        seekBarB = findViewById(R.id.seekBar3)
+
+        //変更ボタン
+        changeButton = findViewById(R.id.changeButton)
+
     }
 }

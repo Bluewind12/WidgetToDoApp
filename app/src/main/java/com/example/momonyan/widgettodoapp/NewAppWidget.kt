@@ -1,17 +1,11 @@
 package com.example.momonyan.widgettodoapp
 
-import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.RemoteViews
-import android.content.IntentFilter
-import android.os.IBinder
-import android.content.ComponentName
 import android.graphics.Color
 
 /**
