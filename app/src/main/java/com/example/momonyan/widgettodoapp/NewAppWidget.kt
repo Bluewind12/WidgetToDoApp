@@ -34,19 +34,21 @@ class NewAppWidget : AppWidgetProvider() {
         internal fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager,
                                      appWidgetId: Int) {
             val views = RemoteViews(context.packageName, R.layout.new_app_widget)
-            preferences = context.getSharedPreferences("Widget", AppCompatActivity.MODE_MULTI_PROCESS)
+            preferences = context.getSharedPreferences("Widget", AppCompatActivity.MODE_PRIVATE)
 
-            views.setTextViewText(R.id.textView2, preferences.getString("list1", ""))
+            views.setTextViewText(R.id.textView2, preferences.getString("list1", "設定なし"))
             views.setTextColor(R.id.textView2, preferences.getInt("list1_Color", Color.rgb(0,0,0)))
 
-            views.setTextViewText(R.id.textView3, preferences.getString("list2", ""))
+            views.setTextViewText(R.id.textView3, preferences.getString("list2", "設定なし"))
             views.setTextColor(R.id.textView3, preferences.getInt("list2_Color",Color.rgb(0,0,0)))
 
-            views.setTextViewText(R.id.textView4, preferences.getString("list3", ""))
+            views.setTextViewText(R.id.textView4, preferences.getString("list3", "設定なし"))
             views.setTextColor(R.id.textView4, preferences.getInt("list3_Color",Color.rgb(0,0,0)))
 
-            views.setTextViewText(R.id.textView5, preferences.getString("list4", ""))
+            views.setTextViewText(R.id.textView5, preferences.getString("list4", "設定なし"))
             views.setTextColor(R.id.textView5, preferences.getInt("list4_Color",Color.rgb(0,0,0)))
+
+            views.setInt(R.id.widgetLay,"setBackgroundColor", preferences.getInt("backGround_Color",Color.rgb(192,192,192)))
 
             // Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)

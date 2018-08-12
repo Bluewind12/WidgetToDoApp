@@ -15,11 +15,12 @@ import android.widget.Toast
 class SetColorActivity : AppCompatActivity() {
     //入れ子
     private lateinit var textView: TextView
-    private lateinit var testTextView: TextView
     private lateinit var seekBarR: SeekBar
     private lateinit var seekBarG: SeekBar
     private lateinit var seekBarB: SeekBar
     private lateinit var changeButton: Button
+    private lateinit var resetButton: Button
+
     //色データ管理
     private var red = 0
     private var green = 0
@@ -44,7 +45,7 @@ class SetColorActivity : AppCompatActivity() {
 
         //表示
         textView.text = getString(R.string.TotalColor, red, green, blue)
-        testTextView.setTextColor(sharedPreferences.getInt(setNames + "_Color", 0))
+        textView.setTextColor(sharedPreferences.getInt(setNames + "_Color", 0))
 
         //シークバー
         seekBarR.progress = sharedPreferences.getInt(setNames + "_ColorRed", 0)
@@ -60,7 +61,7 @@ class SetColorActivity : AppCompatActivity() {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 red = p1
                 totalColor = Color.rgb(red, green, blue)
-                testTextView.setTextColor(totalColor)
+                textView.setTextColor(totalColor)
                 textView.text = getString(R.string.TotalColor, red, green, blue)
             }
 
@@ -79,7 +80,7 @@ class SetColorActivity : AppCompatActivity() {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 green = p1
                 totalColor = Color.rgb(red, green, blue)
-                testTextView.setTextColor(totalColor)
+                textView.setTextColor(totalColor)
                 textView.text = getString(R.string.TotalColor, red, green, blue)
 
             }
@@ -99,7 +100,7 @@ class SetColorActivity : AppCompatActivity() {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 blue = p1
                 totalColor = Color.rgb(red, green, blue)
-                testTextView.setTextColor(totalColor)
+                textView.setTextColor(totalColor)
                 textView.text = getString(R.string.TotalColor, red, green, blue)
             }
 
@@ -126,11 +127,18 @@ class SetColorActivity : AppCompatActivity() {
             intent.setFlags(FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
+        resetButton.setOnClickListener{
+            prefsPrivateEditor.putInt(setNames + "_Color", 0)
+            prefsPrivateEditor.putInt(setNames + "_ColorRed", 0)
+            prefsPrivateEditor.putInt(setNames + "_ColorGreen", 0)
+            prefsPrivateEditor.putInt(setNames + "_ColorBlue", 0)
+            prefsPrivateEditor.apply()
+        }
     }
 
     private fun init() {
         //データ保持用
-        sharedPreferences = getSharedPreferences("Widget", Context.MODE_MULTI_PROCESS);
+        sharedPreferences = getSharedPreferences("Widget", Context.MODE_PRIVATE);
         prefsPrivateEditor = sharedPreferences.edit()
 
         //変更元
@@ -138,7 +146,6 @@ class SetColorActivity : AppCompatActivity() {
 
         //表示
         textView = findViewById(R.id.nameText)
-        testTextView = findViewById(R.id.testText)
 
         //シークバー
         seekBarR = findViewById(R.id.seekBar)
@@ -147,6 +154,7 @@ class SetColorActivity : AppCompatActivity() {
 
         //変更ボタン
         changeButton = findViewById(R.id.changeButton)
+        resetButton = findViewById(R.id.resetButton)
 
     }
 }

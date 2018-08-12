@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var colorButton3: Button
     private lateinit var colorButton4: Button
 
+    //色変更(背景)
+    private lateinit var backColorButton: Button
+
     //データ保持
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var prefsPrivateEditor: SharedPreferences.Editor
@@ -53,6 +56,11 @@ class MainActivity : AppCompatActivity() {
 
         editText3.setText(memoString[3], TextView.BufferType.NORMAL)
         editText3.setTextColor(sharedPreferences.getInt("list4_Color", Color.rgb(0, 0, 0)))
+
+        editText0.setBackgroundColor(sharedPreferences.getInt("backGround_Color", Color.rgb(192, 192, 192)))
+        editText1.setBackgroundColor(sharedPreferences.getInt("backGround_Color", Color.rgb(192, 192, 192)))
+        editText2.setBackgroundColor(sharedPreferences.getInt("backGround_Color", Color.rgb(192, 192, 192)))
+        editText3.setBackgroundColor(sharedPreferences.getInt("backGround_Color", Color.rgb(192, 192, 192)))
 
 
         button.setOnClickListener {
@@ -88,6 +96,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("name", "list4")
             startActivity(intent)
         }
+        backColorButton.setOnClickListener {
+            val intent = Intent(this, SetColorActivity::class.java)
+            intent.putExtra("name", "backGround")
+            startActivity(intent)
+        }
     }
 
     private fun init() {
@@ -108,6 +121,7 @@ class MainActivity : AppCompatActivity() {
         colorButton2 = findViewById(R.id.colorChangeButton2)
         colorButton3 = findViewById(R.id.colorChangeButton3)
         colorButton4 = findViewById(R.id.colorChangeButton4)
+        backColorButton = findViewById(R.id.backButton)
 
         //データ保持
         sharedPreferences = getSharedPreferences("Widget", Context.MODE_MULTI_PROCESS);
